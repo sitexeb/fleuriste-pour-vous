@@ -1,73 +1,84 @@
 const items = [
-  { src: '/images/gallery1.jpg', label: 'Bouquet romantique', cat: 'Occasion' },
-  { src: '/images/gallery2.jpg', label: 'Composition champêtre', cat: 'Saison' },
-  { src: '/images/gallery3.jpg', label: 'Pivoine & douceur', cat: 'Mariage' },
-  { src: '/images/gallery4.jpg', label: 'Séchées & terracotta', cat: 'Décoration' },
-  { src: '/images/gallery5.jpg', label: 'Table de cérémonie', cat: 'Événement' },
-  { src: '/images/gallery6.jpg', label: 'L\'art du bouquet', cat: 'Atelier' },
+  { src: '/images/g1.jpg', label: 'Pivoine & Romantisme', cat: 'Bouquet' },
+  { src: '/images/g2.jpg', label: 'Élégance Nuptiale', cat: 'Mariage' },
+  { src: '/images/g3.jpg', label: 'Pampas & Terracotta', cat: 'Décoration' },
+  { src: '/images/g4.jpg', label: 'Table de Cérémonie', cat: 'Événement' },
+  { src: '/images/g5.jpg', label: 'Fleurs Sauvages', cat: 'Saison' },
+  { src: '/images/g6.jpg', label: 'Vitrine Florale', cat: 'Boutique' },
 ]
 
 export default function Gallery() {
   return (
-    <section id="galerie" style={{ background: '#faf6f1', padding: '7rem 0' }}>
-      <div className="max-w-7xl mx-auto px-6">
+    <section id="galerie" style={{ background: '#1a1a1a', padding: '9rem 0', position: 'relative', overflow: 'hidden' }}>
+
+      {/* Background texture */}
+      <div style={{
+        position: 'absolute', inset: 0,
+        backgroundImage: `radial-gradient(circle at 20% 50%, rgba(201,169,110,0.05) 0%, transparent 50%),
+          radial-gradient(circle at 80% 20%, rgba(122,158,115,0.05) 0%, transparent 50%)`,
+        pointerEvents: 'none',
+      }} />
+
+      <div style={{ maxWidth: 1400, margin: '0 auto', padding: '0 3rem' }}>
         {/* Header */}
-        <div style={{ textAlign: 'center', marginBottom: '3.5rem' }}>
-          <p className="section-tag">Notre univers floral</p>
-          <div className="floral-divider" style={{ margin: '0.75rem auto 1.5rem' }}>
-            <span style={{ fontSize: '1rem', color: '#8fad88' }}>✦</span>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '4rem', flexWrap: 'wrap', gap: '2rem' }}>
+          <div>
+            <p className="label" style={{ color: '#c9a96e' }}>Notre univers floral</p>
+            <div className="luxury-divider" style={{ justifyContent: 'flex-start' }}>
+              <div className="diamond" />
+              <div className="line" style={{ background: 'linear-gradient(to right, #c9a96e, transparent)' }} />
+            </div>
+            <h2 style={{
+              fontFamily: 'Playfair Display, serif',
+              fontSize: 'clamp(2.2rem, 4vw, 3.5rem)',
+              fontWeight: 400,
+              color: '#fff',
+              lineHeight: 1.1,
+            }}>Galerie de<br /><em style={{ color: '#c9a96e' }}>créations</em></h2>
           </div>
-          <h2 className="section-title" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
-            Galerie de créations
-          </h2>
           <p style={{
-            fontFamily: 'Jost, sans-serif',
-            fontSize: '0.95rem',
+            fontFamily: 'Cormorant, serif',
+            fontStyle: 'italic',
+            fontSize: '1.15rem',
             fontWeight: 300,
-            color: '#6b6460',
-            maxWidth: 460,
-            margin: '1rem auto 0',
+            color: 'rgba(255,255,255,0.5)',
+            maxWidth: 320,
             lineHeight: 1.7,
-          }}>
-            Un aperçu de nos compositions florales, réalisées avec soin et passion au fil des saisons.
-          </p>
+          }}>Un aperçu de nos compositions, réalisées avec soin au fil des saisons.</p>
         </div>
 
-        {/* Masonry-style grid */}
+        {/* Masonry grid */}
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-          gridAutoRows: '280px',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gridTemplateRows: 'auto',
           gap: '1rem',
         }}>
           {items.map((item, i) => (
             <div
               key={item.src}
-              className="gallery-item"
+              className="gal-item"
               style={{
-                gridRow: i === 0 || i === 4 ? 'span 2' : 'span 1',
-                borderRadius: 0,
+                gridColumn: i === 0 ? 'span 2' : 'span 1',
+                gridRow: i === 0 ? 'span 2' : 'span 1',
+                height: i === 0 ? 560 : 270,
               }}
             >
-              <img
-                src={item.src}
-                alt={item.label}
-                style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-              />
-              <div className="overlay">
+              <img src={item.src} alt={item.label} />
+              <div className="gal-overlay">
                 <div>
                   <div style={{
-                    fontFamily: 'Jost, sans-serif',
-                    fontSize: '0.62rem',
-                    fontWeight: 500,
-                    letterSpacing: '0.2em',
+                    fontFamily: 'Didact Gothic',
+                    fontSize: '0.6rem',
+                    letterSpacing: '0.25em',
                     textTransform: 'uppercase',
-                    color: '#d4a5a5',
-                    marginBottom: 4,
+                    color: '#c9a96e',
+                    marginBottom: 6,
                   }}>{item.cat}</div>
                   <div style={{
-                    fontFamily: 'Cormorant Garamond, serif',
-                    fontSize: '1.1rem',
+                    fontFamily: 'Playfair Display, serif',
+                    fontStyle: 'italic',
+                    fontSize: i === 0 ? '1.6rem' : '1.1rem',
                     fontWeight: 400,
                     color: '#fff',
                   }}>{item.label}</div>
@@ -77,8 +88,9 @@ export default function Gallery() {
           ))}
         </div>
 
-        <div style={{ textAlign: 'center', marginTop: '3rem' }}>
-          <a href="#contact" className="btn-outline">Commander un bouquet</a>
+        {/* CTA */}
+        <div style={{ textAlign: 'center', marginTop: '4rem' }}>
+          <a href="#contact" className="btn-gold">Commander un bouquet sur mesure</a>
         </div>
       </div>
     </section>
